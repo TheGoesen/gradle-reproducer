@@ -20,6 +20,7 @@ dependencies {
 // but i guess not recommended?
 //val singleFile = getTheFile.get().resolve()
 tasks.register("explode"){
+    //the line here explodes afterEvaluate in :list
     val singleFile = getTheFile.get().singleFile
     doFirst {
         println("we dont get here... " + singleFile)

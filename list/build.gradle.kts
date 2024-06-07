@@ -6,8 +6,9 @@
 
 plugins {
     id("buildlogic.java-library-conventions")
+    //id ("ivy-publish") since ivy-publish uses afterEvaluate, same explosion
 }
-//if this wouldnt be here it work... used by publishing for example
+//if this wouldnt be here it work...but cant easily avoid it, see  used by publishing for example
 project.afterEvaluate{}
 
 val myFile by configurations.registering{
@@ -15,6 +16,6 @@ val myFile by configurations.registering{
     isCanBeConsumed=true
 }
 dependencies{
-    //as seen on
+    //as seen on https://docs.gradle.org/current/userguide/declaring_dependencies.html#ex-declaring-multiple-file-dependencies
     myFile(project.files("Hello"))
 }
