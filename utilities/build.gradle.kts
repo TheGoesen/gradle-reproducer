@@ -28,7 +28,7 @@ tasks.register("explode"){
 }
 //but is this the recommended way?
 tasks.register("doesNotExplode"){
-    //resolving happens inside th
+    //resolving happens twice inside the closure?
     val asFileProperty = project.objects.fileProperty().value {
         println("This line is printed twice, is this a problem?")
         getTheFile.get().singleFile
