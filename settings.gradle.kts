@@ -17,4 +17,11 @@ plugins {
 }
 
 rootProject.name = "blub"
+
+
+enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
+
+
+
+
 include("app", "list", "utilities")

@@ -7,3 +7,14 @@
 plugins {
     id("buildlogic.java-library-conventions")
 }
+//if this wouldnt be here it work... used by publishing for example
+project.afterEvaluate{}
+
+val myFile by configurations.registering{
+    isCanBeResolved=false
+    isCanBeConsumed=true
+}
+dependencies{
+    //as seen on
+    myFile(project.files("Hello"))
+}
