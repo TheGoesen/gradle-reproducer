@@ -9,39 +9,20 @@ import org.gradle.internal.impldep.com.google.common.io.Files
 plugins {
     id("buildlogic.java-library-conventions")
 }
-val getTheFile by configurations.registering
+val getTheFileAsArtifact by configurations.registering
 
 dependencies {
     api(project(":list"))
-    getTheFile(project(":list","myFile"))
+    getTheFileAsArtifact(project(":list","asArtifact"))
 }
 
-// if the next line would be uncommented it would work
-// but i guess not recommended?
-//val singleFile = getTheFile.get().resolve()
+
+
 tasks.register("explode"){
-    inputs.files(getTheFile)
+    inputs.files(getTheFileAsArtifact)
     //the line here explodes afterEvaluate in :list
-    val singleFile = getTheFile.get().singleFile
+    val singleFile = getTheFileAsArtifact.get().singleFile
     doFirst {
         println("we dont get here... " + singleFile)
     }
 }
-//but is this the recommended way?
-tasks.register("doesNotExplode"){
-    //resolving happens twice inside the closure?
-    val asFileProperty = project.objects.fileProperty().value {
-        println("This line is printed twice, is this a problem?")
-        getTheFile.get().singleFile
-    }
-    val output = project.layout.buildDirectory.file("blub")
-    inputs.file(asFileProperty)
-    outputs.file(output)
-
-    doFirst {
-        println("this works" + asFileProperty.get())
-        output.get().asFile.writeText("we did it")
-    }
-
-}
-

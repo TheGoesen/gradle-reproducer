@@ -11,11 +11,8 @@ plugins {
 //if this wouldnt be here it work...but cant easily avoid it, see  used by publishing for example
 project.afterEvaluate{}
 
-val myFile by configurations.registering{
-    isCanBeResolved=false
-    isCanBeConsumed=true
-}
-dependencies{
-    //as seen on https://docs.gradle.org/current/userguide/declaring_dependencies.html#ex-declaring-multiple-file-dependencies
-    myFile(project.files("Hello"))
+
+
+artifacts{
+    add("asArtifact",project.files("Hello"))
 }
